@@ -165,17 +165,16 @@ nav {
   width: 8px; height: 8px;
   border-radius: 50%;
   flex-shrink: 0;
-  background: var(--muted);
+  background: #6c7086;
   transition: background 0.4s ease;
 }
 
-.dot-off  { background: var(--muted) !important; }
-.dot-warn { background: var(--warn)  !important; }
-.dot-ok   { background: var(--ok)    !important; }
+.boot-dot[data-state="warn"] { background: #f9e2af; }
+.boot-dot[data-state="ok"]   { background: #a6e3a1; }
 
 .boot-label { color: var(--subtext); flex: 1; }
-.boot-status-ok   { color: var(--ok); }
-.boot-status-warn { color: var(--warn); }
+.boot-status-ok   { color: #a6e3a1; }
+.boot-status-warn { color: #f9e2af; }
 
 /* ── BADGES STACK ── */
 .stack-badges {
@@ -644,32 +643,32 @@ footer {
   <!-- SIGNATURE: boot console -->
   <div class="boot-console" id="bootConsole">
     <div class="boot-line" id="bl0">
-      <span class="boot-dot dot-off"></span>
+      <span class="boot-dot"></span>
       <span class="boot-label">Mosquitto MQTT Broker</span>
       <span class="boot-status-ok">Port 1883</span>
     </div>
     <div class="boot-line" id="bl1">
-      <span class="boot-dot dot-off"></span>
+      <span class="boot-dot"></span>
       <span class="boot-label">InfluxDB v2</span>
       <span class="boot-status-ok">Port 8086</span>
     </div>
     <div class="boot-line" id="bl2">
-      <span class="boot-dot dot-off"></span>
+      <span class="boot-dot"></span>
       <span class="boot-label">Grafana Dashboard</span>
       <span class="boot-status-ok">Port 3000</span>
     </div>
     <div class="boot-line" id="bl3">
-      <span class="boot-dot dot-off"></span>
+      <span class="boot-dot"></span>
       <span class="boot-label">InfluxDB Writer</span>
       <span class="boot-status-ok">influx_writer.py</span>
     </div>
     <div class="boot-line" id="bl4">
-      <span class="boot-dot dot-off"></span>
+      <span class="boot-dot"></span>
       <span class="boot-label">Analytics Engine</span>
       <span class="boot-status-ok">anomaly_detector.py</span>
     </div>
     <div class="boot-line" id="bl5">
-      <span class="boot-dot dot-off"></span>
+      <span class="boot-dot"></span>
       <span class="boot-label">PLC Collector</span>
       <span class="boot-status-warn">OPC UA · Snap7 fallback</span>
     </div>
@@ -1056,34 +1055,33 @@ footer {
   </div>
 </section>
 
-<!-- ── FOOTER ── */
+<!-- ── FOOTER ── -->
 <footer>
   <div class="footer-copy">© 2026 Fernando Valverde · MotorWatch IQ</div>
   <div class="footer-stack">Python · PySide6 · OPC UA · MQTT · InfluxDB · Grafana · Siemens S7-1200 · ISO 20816-3</div>
 </footer>
 
 <script>
-// Boot LED animation — after all lines appear, light up LEDs cinza→amarelo→verde
-document.addEventListener('DOMContentLoaded', () => {
+// Boot LED animation
+window.addEventListener('load', () => {
+  console.log('[MotorWatch] load fired');
   const dots = document.querySelectorAll('#bootConsole .boot-dot');
-  const lastLineDelay = 1.95 + 0.4;
-  const ledStartMs = lastLineDelay * 1000 + 200;
+  console.log('[MotorWatch] dots found:', dots.length);
+  const ledStartMs = (1.95 + 0.4) * 1000 + 200;
 
   dots.forEach((dot, i) => {
     const isLast = i === dots.length - 1;
     const offset = i * 250;
 
-    // Phase 1: cinza → amarelo
     setTimeout(() => {
-      dot.classList.remove('dot-off');
-      dot.classList.add('dot-warn');
+      dot.setAttribute('data-state', 'warn');
+      console.log('[MotorWatch] dot', i, 'warn');
     }, ledStartMs + offset);
 
-    // Phase 2: amarelo → verde (PLC Collector stays yellow)
     if (!isLast) {
       setTimeout(() => {
-        dot.classList.remove('dot-warn');
-        dot.classList.add('dot-ok');
+        dot.setAttribute('data-state', 'ok');
+        console.log('[MotorWatch] dot', i, 'ok');
       }, ledStartMs + offset + 400);
     }
   });
