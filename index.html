@@ -24,654 +24,225 @@
   --mono:     'IBM Plex Mono', monospace;
   --sans:     'IBM Plex Sans', sans-serif;
 }
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--sans);
-  font-size: 16px;
-  line-height: 1.7;
-}
+body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.7; }
 
 /* ── NAV ── */
 nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  background: rgba(13,13,20,0.92);
-  backdrop-filter: blur(12px);
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(13,13,20,0.93); backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 40px;
-  height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 56px;
 }
-
-.nav-brand {
-  font-family: var(--mono);
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--accent);
-  letter-spacing: 0.5px;
-  text-decoration: none;
-}
-
-.nav-links {
-  display: flex;
-  gap: 28px;
-  list-style: none;
-}
-
-.nav-links a {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--subtext);
-  text-decoration: none;
-  letter-spacing: 0.5px;
-  transition: color 0.2s;
-}
-
+.nav-brand { font-family: var(--mono); font-size: 14px; font-weight: 600; color: var(--accent); text-decoration: none; letter-spacing: 0.5px; }
+.nav-links { display: flex; gap: 24px; list-style: none; }
+.nav-links a { font-family: var(--mono); font-size: 12px; color: var(--subtext); text-decoration: none; transition: color 0.2s; }
 .nav-links a:hover { color: var(--accent); }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.lang-toggle { font-family: var(--mono); font-size: 11px; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; display: flex; overflow: hidden; }
+.lang-toggle button { background: transparent; border: none; color: var(--muted); padding: 4px 10px; cursor: pointer; font-family: var(--mono); font-size: 11px; transition: all 0.2s; }
+.lang-toggle button.active { background: var(--accent); color: #0d0d14; font-weight: 600; }
 
 /* ── HERO ── */
-#hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 120px 80px 80px;
-  position: relative;
-  overflow: hidden;
-}
-
-#hero::before {
-  content: '';
-  position: absolute;
-  top: -200px; right: -200px;
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(137,180,250,0.06) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.hero-eyebrow {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--accent);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-}
-
-.hero-title {
-  font-family: var(--mono);
-  font-size: clamp(36px, 5vw, 64px);
-  font-weight: 600;
-  color: var(--text);
-  line-height: 1.1;
-  margin-bottom: 12px;
-}
-
+#hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 80px 80px; position: relative; overflow: hidden; }
+#hero::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(137,180,250,0.06) 0%, transparent 70%); pointer-events: none; }
+.hero-eyebrow { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+.hero-title { font-family: var(--mono); font-size: clamp(36px, 5vw, 64px); font-weight: 600; color: var(--text); line-height: 1.1; margin-bottom: 12px; }
 .hero-title span { color: var(--accent); }
+.hero-subtitle { font-size: clamp(15px, 2vw, 19px); font-weight: 300; color: var(--subtext); max-width: 640px; margin-bottom: 40px; line-height: 1.7; }
 
-.hero-subtitle {
-  font-family: var(--sans);
-  font-size: clamp(16px, 2vw, 20px);
-  font-weight: 300;
-  color: var(--subtext);
-  max-width: 600px;
-  margin-bottom: 40px;
-  line-height: 1.6;
-}
-
-/* ── BOOT CONSOLE — signature element ── */
-.boot-console {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 20px 24px;
-  max-width: 540px;
-  margin-bottom: 40px;
-  font-family: var(--mono);
-  font-size: 13px;
-}
-
-.boot-line {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 3px 0;
-  opacity: 0;
-  animation: fadeIn 0.4s ease forwards;
-}
-
+/* ── BOOT CONSOLE ── */
+.boot-console { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px 24px; max-width: 540px; margin-bottom: 40px; font-family: var(--mono); font-size: 13px; }
+.boot-line { display: flex; align-items: center; gap: 10px; padding: 3px 0; opacity: 0; animation: fadeIn 0.4s ease forwards; }
 .boot-line:nth-child(1) { animation-delay: 0.2s; }
 .boot-line:nth-child(2) { animation-delay: 0.55s; }
 .boot-line:nth-child(3) { animation-delay: 0.90s; }
 .boot-line:nth-child(4) { animation-delay: 1.25s; }
 .boot-line:nth-child(5) { animation-delay: 1.60s; }
 .boot-line:nth-child(6) { animation-delay: 1.95s; }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateX(-6px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-.boot-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  background: #6c7086;
-  transition: background 0.4s ease;
-}
-
+@keyframes fadeIn { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }
+.boot-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; background: #6c7086; transition: background 0.4s ease; }
 .boot-dot[data-state="warn"] { background: #f9e2af; }
 .boot-dot[data-state="ok"]   { background: #a6e3a1; }
-
 .boot-label { color: var(--subtext); flex: 1; }
 .boot-status-ok   { color: #a6e3a1; }
 .boot-status-warn { color: #f9e2af; }
+@media (prefers-reduced-motion: reduce) { .boot-line { animation: none; opacity: 1; } }
 
-/* ── BADGES STACK ── */
-.stack-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 40px;
-}
-
-.badge {
-  font-family: var(--mono);
-  font-size: 11px;
-  padding: 4px 10px;
-  border-radius: 4px;
-  border: 1px solid var(--border);
-  color: var(--subtext);
-  background: var(--surface);
-  letter-spacing: 0.3px;
-}
-
+/* ── BADGES ── */
+.stack-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+.badge { font-family: var(--mono); font-size: 11px; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border); color: var(--subtext); background: var(--surface); letter-spacing: 0.3px; }
 .badge-accent { border-color: var(--accent); color: var(--accent); }
-
-/* ── CTA BUTTONS ── */
-.hero-ctas {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.btn {
-  font-family: var(--mono);
-  font-size: 13px;
-  padding: 10px 22px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.2s;
-  letter-spacing: 0.3px;
-}
-
-.btn-primary {
-  background: var(--accent);
-  color: #0d0d14;
-  border: 1px solid var(--accent);
-}
-
+.hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn { font-family: var(--mono); font-size: 13px; padding: 10px 22px; border-radius: 6px; text-decoration: none; font-weight: 600; transition: all 0.2s; letter-spacing: 0.3px; }
+.btn-primary { background: var(--accent); color: #0d0d14; border: 1px solid var(--accent); }
 .btn-primary:hover { background: #a5c8ff; }
-
-.btn-outline {
-  background: transparent;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-}
-
+.btn-outline { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
 .btn-outline:hover { background: rgba(137,180,250,0.08); }
 
 /* ── SECTIONS ── */
-section {
-  padding: 96px 80px;
-  border-top: 1px solid var(--border);
-}
+section { padding: 96px 80px; border-top: 1px solid var(--border); }
+.section-label { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
+.section-title { font-family: var(--mono); font-size: clamp(22px, 3vw, 34px); font-weight: 600; color: var(--text); margin-bottom: 16px; }
+.section-desc { font-size: 15px; color: var(--subtext); max-width: 780px; margin-bottom: 40px; line-height: 1.85; }
+.section-desc p { margin-bottom: 14px; }
+.section-desc p:last-child { margin-bottom: 0; }
 
-.section-label {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--accent);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-
-.section-title {
-  font-family: var(--mono);
-  font-size: clamp(24px, 3vw, 36px);
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 16px;
-}
-
-.section-desc {
-  font-size: 16px;
-  color: var(--subtext);
-  max-width: 680px;
-  margin-bottom: 48px;
-  line-height: 1.8;
-}
-
-/* ── HARDWARE SECTION ── */
 #hardware { background: var(--surface); }
+#intelligence { background: var(--surface); }
+#about { background: var(--surface); }
 
-.hw-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-bottom: 40px;
-}
-
-.hw-card {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.hw-card img {
-  width: 100%;
-  height: 280px;
-  object-fit: cover;
-  display: block;
-  filter: brightness(0.9);
-  transition: filter 0.3s;
-}
-
+/* ── PHOTO GRID ── */
+.hw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 32px; }
+.hw-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 32px; }
+.hw-card { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.hw-card img { width: 100%; height: 260px; object-fit: cover; display: block; filter: brightness(0.92); transition: filter 0.3s; }
+.hw-card.tall img { height: 340px; }
 .hw-card:hover img { filter: brightness(1); }
+.hw-card-caption { padding: 14px 18px; border-top: 1px solid var(--border); }
+.hw-card-title { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 4px; }
+.hw-card-desc { font-size: 13px; color: var(--subtext); line-height: 1.5; }
 
-.hw-card-caption {
-  padding: 14px 18px;
-  border-top: 1px solid var(--border);
-}
+/* ── SPECS GRID ── */
+.hw-specs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-top: 32px; }
+.spec-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 18px; }
+.spec-card-label { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+.spec-card-value { font-family: var(--mono); font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.5; }
 
-.hw-card-title {
-  font-family: var(--mono);
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--accent);
-  margin-bottom: 4px;
-}
-
-.hw-card-desc {
-  font-size: 13px;
-  color: var(--subtext);
-}
-
-/* ── HW SPECS TABLE ── */
-.hw-specs {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-  margin-top: 32px;
-}
-
-.spec-card {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 20px;
-}
-
-.spec-card-label {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--muted);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
-
-.spec-card-value {
-  font-family: var(--mono);
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--text);
-}
+/* ── LOGIC BOX ── */
+.logic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 32px 0; }
+.logic-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+.logic-card-title { font-family: var(--mono); font-size: 12px; font-weight: 600; margin-bottom: 10px; }
+.logic-card-title.ok   { color: var(--ok); }
+.logic-card-title.warn { color: var(--warn); }
+.logic-card-title.crit { color: var(--crit); }
+.logic-card-title.info { color: var(--accent); }
+.logic-card p { font-size: 13px; color: var(--subtext); line-height: 1.6; }
 
 /* ── SCREENSHOT GRID ── */
-.screenshot-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
+.screenshot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.screenshot-item { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.screenshot-item img { width: 100%; display: block; border-bottom: 1px solid var(--border); }
+.screenshot-caption { padding: 12px 16px; }
+.screenshot-caption strong { display: block; font-family: var(--mono); font-size: 12px; color: var(--accent); margin-bottom: 4px; }
+.screenshot-caption span { font-size: 13px; color: var(--subtext); line-height: 1.5; }
 
-.screenshot-item {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.screenshot-item img {
-  width: 100%;
-  display: block;
-  border-bottom: 1px solid var(--border);
-}
-
-.screenshot-caption {
-  padding: 12px 16px;
-}
-
-.screenshot-caption strong {
-  display: block;
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--accent);
-  margin-bottom: 4px;
-}
-
-.screenshot-caption span {
-  font-size: 13px;
-  color: var(--subtext);
-}
-
-/* ── ARCHITECTURE DIAGRAM ── */
-.arch-diagram {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 32px;
-  margin-bottom: 32px;
-}
-
-.arch-flow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0;
-}
-
-.arch-node {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 14px 20px;
-  text-align: center;
-  min-width: 120px;
-}
-
-.arch-node-label {
-  font-family: var(--mono);
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--accent);
-  margin-bottom: 4px;
-}
-
-.arch-node-sub {
-  font-size: 11px;
-  color: var(--muted);
-}
-
-.arch-arrow {
-  color: var(--border);
-  font-size: 20px;
-  padding: 0 8px;
-  flex-shrink: 0;
-}
-
-.arch-node-plc { border-color: var(--peach); }
+/* ── ARCH DIAGRAM ── */
+.arch-diagram { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 28px; margin-bottom: 28px; }
+.arch-flow { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0; }
+.arch-node { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; text-align: center; min-width: 110px; }
+.arch-node-label { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--accent); margin-bottom: 3px; }
+.arch-node-sub { font-size: 11px; color: var(--muted); }
+.arch-arrow { color: var(--muted); font-size: 18px; padding: 0 6px; flex-shrink: 0; }
 .arch-node-plc .arch-node-label { color: var(--peach); }
+.arch-node-plc { border-color: rgba(250,179,135,0.3); }
+.arch-node-db .arch-node-label  { color: var(--accent2); }
+.arch-node-db  { border-color: rgba(203,166,247,0.3); }
+.arch-node-ml .arch-node-label  { color: var(--ok); }
+.arch-node-ml  { border-color: rgba(166,227,161,0.3); }
 
-.arch-node-db { border-color: var(--accent2); }
-.arch-node-db .arch-node-label { color: var(--accent2); }
-
-.arch-node-ml { border-color: var(--ok); }
-.arch-node-ml .arch-node-label { color: var(--ok); }
-
-/* ── REPORT EMBED ── */
-.report-embed-wrapper {
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-  margin-top: 16px;
-}
-
-.report-tabs {
-  display: flex;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-}
-
-.report-tab {
-  font-family: var(--mono);
-  font-size: 12px;
-  padding: 10px 20px;
-  border: none;
-  background: transparent;
-  color: var(--muted);
-  cursor: pointer;
-  transition: color 0.2s;
-  letter-spacing: 0.3px;
-}
-
-.report-tab.active {
-  color: var(--accent);
-  border-bottom: 2px solid var(--accent);
-}
-
-.report-iframe {
-  width: 100%;
-  height: 600px;
-  border: none;
-  display: none;
-  background: #11111b;
-}
-
-.report-iframe.active { display: block; }
+/* ── TECH DECISIONS ── */
+.decisions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; }
+.decision-card { background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 18px 20px; }
+.decision-title { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 8px; }
+.decision-body { font-size: 13px; color: var(--subtext); line-height: 1.6; }
+.decision-card.teal  { border-left-color: #94e2d5; }
+.decision-card.teal .decision-title { color: #94e2d5; }
+.decision-card.green { border-left-color: var(--ok); }
+.decision-card.green .decision-title { color: var(--ok); }
+.decision-card.mauve { border-left-color: var(--accent2); }
+.decision-card.mauve .decision-title { color: var(--accent2); }
+.decision-card.peach { border-left-color: var(--peach); }
+.decision-card.peach .decision-title { color: var(--peach); }
 
 /* ── ML PIPELINE ── */
-.ml-pipeline {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
-  margin-bottom: 32px;
-}
+.ml-pipeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin-bottom: 28px; }
+.ml-step { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 18px; }
+.ml-step-num { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 1px; margin-bottom: 8px; }
+.ml-step-title { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--ok); margin-bottom: 6px; }
+.ml-step-desc { font-size: 13px; color: var(--subtext); line-height: 1.5; }
 
-.ml-step {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 20px;
-  position: relative;
-}
-
-.ml-step-num {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--muted);
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-}
-
-.ml-step-title {
-  font-family: var(--mono);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--ok);
-  margin-bottom: 6px;
-}
-
-.ml-step-desc {
-  font-size: 13px;
-  color: var(--subtext);
-  line-height: 1.5;
-}
+/* ── REPORT EMBED ── */
+.report-embed-wrapper { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-top: 16px; }
+.report-tabs { display: flex; background: var(--surface); border-bottom: 1px solid var(--border); }
+.report-tab { font-family: var(--mono); font-size: 12px; padding: 10px 20px; border: none; background: transparent; color: var(--muted); cursor: pointer; transition: color 0.2s; }
+.report-tab.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
+.report-iframe { width: 100%; height: 580px; border: none; display: none; background: #11111b; }
+.report-iframe.active { display: block; }
 
 /* ── ABOUT ── */
-#about {
-  background: var(--surface);
-}
-
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  align-items: start;
-}
-
-.about-skills {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.skill-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.skill-label {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--subtext);
-  min-width: 160px;
-}
-
-.skill-bar-bg {
-  flex: 1;
-  height: 4px;
-  background: var(--border);
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.skill-bar-fill {
-  height: 100%;
-  background: var(--accent);
-  border-radius: 2px;
-}
-
-.about-links {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 32px;
-}
-
-.about-link {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-family: var(--mono);
-  font-size: 13px;
-  color: var(--accent);
-  text-decoration: none;
-  padding: 12px 16px;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  transition: border-color 0.2s;
-}
-
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.about-skills { display: flex; flex-direction: column; gap: 12px; }
+.skill-row { display: flex; align-items: center; gap: 12px; }
+.skill-label { font-family: var(--mono); font-size: 12px; color: var(--subtext); min-width: 170px; }
+.skill-bar-bg { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.skill-bar-fill { height: 100%; background: var(--accent); border-radius: 2px; }
+.about-links { display: flex; flex-direction: column; gap: 10px; margin-top: 28px; }
+.about-link { display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 13px; color: var(--accent); text-decoration: none; padding: 11px 16px; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; transition: border-color 0.2s; }
 .about-link:hover { border-color: var(--accent); }
 
 /* ── FOOTER ── */
-footer {
-  padding: 40px 80px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
-}
+footer { padding: 36px 80px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-copy { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.footer-stack { font-family: var(--mono); font-size: 11px; color: var(--muted); }
 
-.footer-copy {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.footer-stack {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--muted);
-}
+/* ── I18N ── */
+[data-en], [data-es] { }
+body.lang-en [data-es] { display: none !important; }
+body.lang-es [data-en] { display: none !important; }
 
 /* ── RESPONSIVE ── */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   nav { padding: 0 20px; }
   .nav-links { display: none; }
   #hero, section, footer { padding-left: 24px; padding-right: 24px; }
-  .hw-grid, .screenshot-grid, .about-grid { grid-template-columns: 1fr; }
+  .hw-grid, .hw-grid-3, .screenshot-grid, .about-grid, .logic-grid, .decisions-grid { grid-template-columns: 1fr; }
   .arch-flow { flex-direction: column; }
-  .arch-arrow { transform: rotate(90deg); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .boot-line { animation: none; opacity: 1; }
 }
 </style>
 </head>
-<body>
+<body class="lang-en">
 
 <!-- ── NAV ── -->
 <nav>
   <a href="#hero" class="nav-brand">⚙ MotorWatch IQ</a>
   <ul class="nav-links">
-    <li><a href="#hardware">Hardware</a></li>
-    <li><a href="#simulator">Simulator</a></li>
-    <li><a href="#communication">Communication</a></li>
-    <li><a href="#analytics">Analytics</a></li>
-    <li><a href="#intelligence">Intelligence</a></li>
-    <li><a href="#about">About</a></li>
+    <li><a href="#hardware" data-en>Hardware</a><a href="#hardware" data-es>Hardware</a></li>
+    <li><a href="#simulator" data-en>Simulator</a><a href="#simulator" data-es>Simulador</a></li>
+    <li><a href="#communication" data-en>Communication</a><a href="#communication" data-es>Comunicación</a></li>
+    <li><a href="#analytics" data-en>Analytics</a><a href="#analytics" data-es>Análisis</a></li>
+    <li><a href="#intelligence" data-en>Intelligence</a><a href="#intelligence" data-es>Inteligencia</a></li>
+    <li><a href="#about" data-en>About</a><a href="#about" data-es>Acerca de</a></li>
   </ul>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button id="btn-en" class="active" onclick="setLang('en')">English</button>
+      <button id="btn-es" onclick="setLang('es')">Español</button>
+    </div>
+  </div>
 </nav>
 
 <!-- ── HERO ── -->
 <section id="hero">
   <div class="hero-eyebrow">Industrial IoT · Predictive Maintenance · Industry 4.0</div>
   <h1 class="hero-title">MotorWatch <span>IQ</span></h1>
-  <p class="hero-subtitle">
-    End-to-end motor condition monitoring — from IFM VVB306 vibration sensors on a Siemens S7-1200 PLC to machine-learning anomaly detection, Grafana dashboards, and bilingual maintenance reports.
+
+  <p class="hero-subtitle" data-en>
+    End-to-end motor condition monitoring — from IFM VVB306 vibration and temperature sensors connected to a Siemens S7-1200 PLC, through a full IIoT data pipeline, to machine-learning anomaly detection, Grafana dashboards, and bilingual maintenance reports. Built entirely by one engineer, from hardware wiring to ML model training.
+  </p>
+  <p class="hero-subtitle" data-es>
+    Monitorización de estado de motores de extremo a extremo — desde sensores IFM VVB306 de vibración y temperatura conectados a un PLC Siemens S7-1200, a través de un pipeline IIoT completo, hasta detección de anomalías por machine learning, dashboards Grafana e informes de mantenimiento bilingües. Desarrollado íntegramente por un ingeniero, desde el cableado hardware hasta el entrenamiento del modelo ML.
   </p>
 
-  <!-- SIGNATURE: boot console -->
   <div class="boot-console" id="bootConsole">
-    <div class="boot-line" id="bl0">
-      <span class="boot-dot"></span>
-      <span class="boot-label">Mosquitto MQTT Broker</span>
-      <span class="boot-status-ok">Port 1883</span>
-    </div>
-    <div class="boot-line" id="bl1">
-      <span class="boot-dot"></span>
-      <span class="boot-label">InfluxDB v2</span>
-      <span class="boot-status-ok">Port 8086</span>
-    </div>
-    <div class="boot-line" id="bl2">
-      <span class="boot-dot"></span>
-      <span class="boot-label">Grafana Dashboard</span>
-      <span class="boot-status-ok">Port 3000</span>
-    </div>
-    <div class="boot-line" id="bl3">
-      <span class="boot-dot"></span>
-      <span class="boot-label">InfluxDB Writer</span>
-      <span class="boot-status-ok">influx_writer.py</span>
-    </div>
-    <div class="boot-line" id="bl4">
-      <span class="boot-dot"></span>
-      <span class="boot-label">Analytics Engine</span>
-      <span class="boot-status-ok">anomaly_detector.py</span>
-    </div>
-    <div class="boot-line" id="bl5">
-      <span class="boot-dot"></span>
-      <span class="boot-label">PLC Collector</span>
-      <span class="boot-status-warn">OPC UA · Snap7 fallback</span>
-    </div>
+    <div class="boot-line"><span class="boot-dot"></span><span class="boot-label">Mosquitto MQTT Broker</span><span class="boot-status-ok">Port 1883</span></div>
+    <div class="boot-line"><span class="boot-dot"></span><span class="boot-label">InfluxDB v2</span><span class="boot-status-ok">Port 8086</span></div>
+    <div class="boot-line"><span class="boot-dot"></span><span class="boot-label">Grafana Dashboard</span><span class="boot-status-ok">Port 3000</span></div>
+    <div class="boot-line"><span class="boot-dot"></span><span class="boot-label">InfluxDB Writer</span><span class="boot-status-ok">influx_writer.py</span></div>
+    <div class="boot-line"><span class="boot-dot"></span><span class="boot-label">Analytics Engine</span><span class="boot-status-ok">anomaly_detector.py</span></div>
+    <div class="boot-line"><span class="boot-dot"></span><span class="boot-label">PLC Collector</span><span class="boot-status-warn">OPC UA · Snap7 fallback</span></div>
   </div>
 
   <div class="stack-badges">
@@ -691,234 +262,367 @@ footer {
 
   <div class="hero-ctas">
     <a href="https://github.com/Phernando82/motor_watch_IQ" class="btn btn-primary" target="_blank">View on GitHub</a>
-    <a href="#hardware" class="btn btn-outline">Explore project ↓</a>
+    <a href="#hardware" class="btn btn-outline" data-en>Explore project ↓</a>
+    <a href="#hardware" class="btn btn-outline" data-es>Explorar proyecto ↓</a>
   </div>
 </section>
 
 <!-- ── HARDWARE ── -->
 <section id="hardware">
-  <div class="section-label">01 · Hardware</div>
-  <h2 class="section-title">Real industrial hardware</h2>
-  <p class="section-desc">
-    The monitoring stack runs on a production-grade Siemens S7-1200 (CPU 1214C DC/DC/DC) connected to four IFM VVB306 IO-Link vibration and temperature sensors via an AL1901 IO-Link master. The HMI is a Siemens MTP700 Unified Basic, all networked over PROFINET.
-  </p>
+  <div class="section-label" data-en>01 · Hardware</div>
+  <div class="section-label" data-es>01 · Hardware</div>
+  <h2 class="section-title" data-en>Real industrial hardware — production environment</h2>
+  <h2 class="section-title" data-es>Hardware industrial real — entorno de producción</h2>
 
-  <div class="hw-grid">
+  <div class="section-desc" data-en>
+    <p>The system monitors vibration and temperature of four industrial motors in real time. Each motor is equipped with an IFM VVB306 IO-Link sensor measuring velocity (mm/s RMS), acceleration (g peak), and temperature (°C). The sensors connect to an IFM AL1901 IO-Link master, which communicates with a Siemens S7-1200 CPU 1214C DC/DC/DC via PROFINET. A Siemens MTP700 Unified Basic HMI provides operator interaction directly on the shop floor.</p>
+    <p>The operator can configure pre-alarm and alarm thresholds individually for each motor — velocity, acceleration, and temperature — directly from the HMI settings screen, protected by PIN authentication. Configuration changes are saved to retentive data blocks via a state machine (FB_Save_Parameters), ensuring parameters survive power cycles. The main screen displays live readings for all four motors grouped by production zone.</p>
+    <p><strong style="color:var(--warn)">Visual alarm logic:</strong> Motors in normal state display in blue with white value fields. A pre-alarm turns the motor icon yellow and highlights the specific parameter field that triggered it, so the operator immediately knows which measurement exceeded the threshold. An alarm turns the motor icon red with the critical field highlighted in red. A visible pre-alarm LED output activates on the control panel.</p>
+    <p><strong style="color:var(--crit)">Alarm response logic:</strong> On alarm, a zone-specific siren activates and a motor stop output can be enabled per motor configuration. An authenticated operator can permanently silence the alarm. An operator without full access can silence temporarily — the siren resumes after one hour if the fault has not been resolved. The output only re-enables after the root cause is cleared, preventing inadvertent restart.</p>
+  </div>
+  <div class="section-desc" data-es>
+    <p>El sistema monitoriza vibración y temperatura de cuatro motores industriales en tiempo real. Cada motor dispone de un sensor IFM VVB306 IO-Link que mide velocidad (mm/s RMS), aceleración (g pico) y temperatura (°C). Los sensores se conectan a un maestro IO-Link IFM AL1901, que se comunica con un Siemens S7-1200 CPU 1214C DC/DC/DC mediante PROFINET. Una HMI Siemens MTP700 Unified Basic permite la interacción del operario directamente en planta.</p>
+    <p>El operario puede configurar individualmente los umbrales de prealarma y alarma para cada motor — velocidad, aceleración y temperatura — desde la pantalla de configuración de la HMI, protegida por autenticación PIN. Los cambios se guardan en bloques de datos retentivos mediante una máquina de estados (FB_Save_Parameters), asegurando que los parámetros sobreviven ciclos de alimentación. La pantalla principal muestra lecturas en tiempo real de los cuatro motores agrupados por zona de producción.</p>
+    <p><strong style="color:var(--warn)">Lógica de alarma visual:</strong> Los motores en estado normal se muestran en azul con campos de valor en blanco. Una prealarma pone el icono del motor en amarillo y resalta el campo del parámetro específico que la activó, para que el operario identifique inmediatamente qué medición superó el umbral. Una alarma pone el motor en rojo con el campo crítico resaltado en rojo.</p>
+    <p><strong style="color:var(--crit)">Lógica de respuesta a alarma:</strong> En alarma, se activa una sirena por zona y se puede habilitar la parada del motor por configuración. Un operario autenticado puede silenciar permanentemente. Sin acceso completo, el silenciamiento es temporal — la sirena reanuda tras una hora si el fallo no se ha resuelto. La salida solo se reactiva tras solucionar la causa raíz.</p>
+  </div>
+
+  <!-- Board + HMI alarm side by side, full height -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;align-items:stretch">
     <div class="hw-card">
-      <img src="images/network_view.png" alt="TIA Portal network view — MTP700, S7-1200, AL1901 over PROFINET">
+      <img src="images/board.jpg" alt="Control panel" style="width:100%;display:block;height:420px;object-fit:cover;object-position:center top;filter:brightness(0.92);transition:filter 0.3s" onmouseover="this.style.filter='brightness(1)'" onmouseout="this.style.filter='brightness(0.92)'">
       <div class="hw-card-caption">
-        <div class="hw-card-title">Devices & Networks — PROFINET topology</div>
-        <div class="hw-card-desc">MTP700 Unified · CPU 1214C · AL1901 IO-Link master at 192.168.0.1–3</div>
+        <div class="hw-card-title" data-en>Control panel — production hardware</div>
+        <div class="hw-card-title" data-es>Cuadro de control — hardware de producción</div>
+        <div class="hw-card-desc" data-en>Siemens S7-1200 CPU 1214C (centre), IFM AL1901 IO-Link master (orange, right), Schneider/Mibbo 24 V PSU (left). PROFINET cabling in green, IO-Link sensor cables in orange at base. Circuit breakers and terminal blocks for field wiring on lower DIN rails.</div>
+        <div class="hw-card-desc" data-es>Siemens S7-1200 CPU 1214C (centro), maestro IO-Link IFM AL1901 (naranja, derecha), fuente 24 V Schneider/Mibbo (izquierda). Cableado PROFINET en verde, cables de sensor IO-Link en naranja en la base. Magnetotérmicos y bornas de campo en los carriles DIN inferiores.</div>
       </div>
     </div>
     <div class="hw-card">
-      <img src="images/main_screen.png" alt="HMI MTP700 — tela principal com 4 motores">
+      <img src="images/hmi_alarm.jpg" alt="HMI MTP700 — alarm state" style="width:100%;display:block;height:420px;object-fit:contain;background:#0d0d14;filter:brightness(0.92);transition:filter 0.3s" onmouseover="this.style.filter='brightness(1)'" onmouseout="this.style.filter='brightness(0.92)'">
       <div class="hw-card-caption">
-        <div class="hw-card-title">HMI MTP700 — main screen</div>
-        <div class="hw-card-desc">4-motor overview: velocity mm/s, acceleration G, temperature °C per zone</div>
-      </div>
-    </div>
-    <div class="hw-card">
-      <img src="images/output_alarm.png" alt="TIA Portal ladder — output alarm logic">
-      <div class="hw-card-caption">
-        <div class="hw-card-title">Main OB1 — alarm output ladder</div>
-        <div class="hw-card-desc">Pre-alarm LEDs and zone sirens driven by DB_Status per motor, with silence logic</div>
-      </div>
-    </div>
-    <div class="hw-card">
-      <img src="images/fb_evaluate.png" alt="TIA Portal — FB_Evaluate_Motor SCL">
-      <div class="hw-card-caption">
-        <div class="hw-card-title">FB_Evaluate_Motor — SCL function block</div>
-        <div class="hw-card-desc">Evaluates vibration, acceleration and temperature against configurable pre-alarm and alarm thresholds per motor</div>
+        <div class="hw-card-title" data-en>HMI MTP700 — main screen, live alarm state</div>
+        <div class="hw-card-title" data-es>HMI MTP700 — pantalla principal, estado de alarma en vivo</div>
+        <div class="hw-card-desc" data-en>Motors in alarm show red icons and highlighted value fields. Retal motor shows velocity and acceleration in alarm (red fields). Normal motors display blue icons with white fields.</div>
+        <div class="hw-card-desc" data-es>Los motores en alarma muestran iconos rojos y campos resaltados. El motor Retal muestra velocidad y aceleración en alarma (campos rojos). Los motores normales muestran iconos azules con campos blancos.</div>
       </div>
     </div>
   </div>
 
-  <div class="hw-grid">
+  <!-- 4 spec cards in a row -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px">
+    <div class="spec-card">
+      <div class="spec-card-label" data-en>Monitored motors</div>
+      <div class="spec-card-label" data-es>Motores monitorizados</div>
+      <div class="spec-card-value" style="font-size:12px;font-weight:400;color:var(--subtext);line-height:1.6" data-en>4 motors · 2 zones<br>Slitter · Retal<br>DRO 924 NT · 718/924</div>
+      <div class="spec-card-value" style="font-size:12px;font-weight:400;color:var(--subtext);line-height:1.6" data-es>4 motores · 2 zonas<br>Slitter · Retal<br>DRO 924 NT · 718/924</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-card-label" data-en>Parameters per motor</div>
+      <div class="spec-card-label" data-es>Parámetros por motor</div>
+      <div class="spec-card-value" style="font-size:12px;font-weight:400;color:var(--subtext);line-height:1.6">v-RMS (mm/s)<br>a-Peak (G)<br>Temperature (°C)</div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-card-label" data-en>Alarm states</div>
+      <div class="spec-card-label" data-es>Estados de alarma</div>
+      <div class="spec-card-value" style="font-size:12px;font-weight:400;line-height:1.8">
+        <span style="color:var(--accent)">■</span> <span style="color:var(--subtext)" data-en>Normal — blue</span><span style="color:var(--subtext)" data-es>Normal — azul</span><br>
+        <span style="color:var(--warn)">■</span> <span style="color:var(--subtext)" data-en>Pre-alarm — yellow</span><span style="color:var(--subtext)" data-es>Prealarma — amarillo</span><br>
+        <span style="color:var(--crit)">■</span> <span style="color:var(--subtext)" data-en>Alarm — red</span><span style="color:var(--subtext)" data-es>Alarma — rojo</span>
+      </div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-card-label" data-en>Silence logic</div>
+      <div class="spec-card-label" data-es>Silenciamiento</div>
+      <div class="spec-card-value" style="font-size:12px;font-weight:400;color:var(--subtext);line-height:1.6" data-en>Auth: permanent<br>Standard: 1 h temp.<br>Output clears on fix</div>
+      <div class="spec-card-value" style="font-size:12px;font-weight:400;color:var(--subtext);line-height:1.6" data-es>Auth: permanente<br>Estándar: 1 h temp.<br>Salida se libera al resolver</div>
+    </div>
+  </div>
+
+  <!-- 4 HMI photos 2x2 -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px">
     <div class="hw-card">
-      <img src="images/project_tree.png" alt="TIA Portal project tree">
+      <img src="images/hmi_main.jpg" alt="HMI — pre-alarm state" style="width:100%;display:block;object-fit:contain;background:#0d0d14;max-height:280px">
       <div class="hw-card-caption">
-        <div class="hw-card-title">Project tree — structured block organisation</div>
-        <div class="hw-card-desc">00_System · 01_Commands · 02_Save · 03_Evaluate · 04_IFM_AL1901 · 05_PinGate · 06_Status · 07_Parameters · 08_Libraries</div>
+        <div class="hw-card-title" data-en>HMI — pre-alarm state</div>
+        <div class="hw-card-title" data-es>HMI — estado de prealarma</div>
+        <div class="hw-card-desc" data-en>All four motors in pre-alarm (yellow icons). The specific field exceeding the threshold is highlighted per motor, directing the operator to the root cause immediately.</div>
+        <div class="hw-card-desc" data-es>Los cuatro motores en prealarma (iconos amarillos). El campo específico que supera el umbral se resalta por motor, dirigiendo al operario a la causa raíz de inmediato.</div>
       </div>
     </div>
     <div class="hw-card">
-      <img src="images/fb_save_parameters.png" alt="TIA Portal — FB_Save_Parameters SCL">
+      <img src="images/hmi_threshold_settings.jpg" alt="HMI — threshold configuration" style="width:100%;display:block;object-fit:contain;background:#0d0d14;max-height:280px">
       <div class="hw-card-caption">
-        <div class="hw-card-title">FB_Save_Parameters — write-on-change state machine</div>
-        <div class="hw-card-desc">SCL state machine: Idle → Saving → Saved. Copies HMI edit DB to retentive parameter DB on operator Save command</div>
+        <div class="hw-card-title" data-en>HMI — threshold configuration per motor</div>
+        <div class="hw-card-title" data-es>HMI — configuración de umbrales por motor</div>
+        <div class="hw-card-desc" data-en>Per-motor configuration: pre-alarm and alarm values for velocity (mm/s), acceleration (G), and temperature (°C). Stop motor and siren enable/disable checkboxes per parameter. Changes saved to retentive DB via FB_Save_Parameters state machine.</div>
+        <div class="hw-card-desc" data-es>Configuración por motor: valores de prealarma y alarma para velocidad (mm/s), aceleración (G) y temperatura (°C). Checkboxes de parada de motor y sirena por parámetro. Cambios guardados en DB retentivo mediante máquina de estados FB_Save_Parameters.</div>
+      </div>
+    </div>
+    <div class="hw-card">
+      <img src="images/hmi_settings.jpeg" alt="HMI — settings menu" style="width:100%;display:block;object-fit:contain;background:#0d0d14;max-height:280px">
+      <div class="hw-card-caption">
+        <div class="hw-card-title" data-en>HMI — settings menu</div>
+        <div class="hw-card-title" data-es>HMI — menú de configuración</div>
+        <div class="hw-card-desc" data-en>PIN-protected settings menu with individual configuration access per motor zone. Each motor has independent threshold and alarm behaviour settings.</div>
+        <div class="hw-card-desc" data-es>Menú de configuración protegido por PIN con acceso individual por zona de motor. Cada motor dispone de configuración independiente de umbrales y comportamiento de alarma.</div>
+      </div>
+    </div>
+    <div class="hw-card">
+      <img src="images/main_screen.png" alt="HMI design in TIA Portal WinCC editor" style="width:100%;display:block;object-fit:contain;background:#0d0d14;max-height:280px">
+      <div class="hw-card-caption">
+        <div class="hw-card-title" data-en>HMI design — TIA Portal WinCC editor</div>
+        <div class="hw-card-title" data-es>Diseño HMI — editor WinCC de TIA Portal</div>
+        <div class="hw-card-desc" data-en>Main screen layout in WinCC Unified editor: two production zones, four motor objects with dynamic colour bindings, Silenciar and Reset buttons, navigation to settings.</div>
+        <div class="hw-card-desc" data-es>Diseño en editor WinCC Unified: dos zonas de producción, cuatro objetos de motor con binding de color dinámico, botones Silenciar y Reset, navegación a configuraciones.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIA Portal screenshots -->
+  <div style="margin-top:12px; margin-bottom:20px">
+    <div class="section-label" style="margin-bottom:16px" data-en>TIA Portal — program structure</div>
+    <div class="section-label" style="margin-bottom:16px" data-es>TIA Portal — estructura del programa</div>
+  </div>
+  <div class="hw-grid">
+    <div class="hw-card">
+      <img src="images/network_view.png" alt="TIA Portal network view">
+      <div class="hw-card-caption">
+        <div class="hw-card-title" data-en>Devices & Networks — PROFINET topology</div>
+        <div class="hw-card-title" data-es>Dispositivos y redes — topología PROFINET</div>
+        <div class="hw-card-desc" data-en>MTP700 Unified · CPU 1214C · AL1901 IO-Link master. Addresses 192.168.0.1–3 on PN/IE_1 subnet.</div>
+        <div class="hw-card-desc" data-es>MTP700 Unified · CPU 1214C · maestro AL1901 IO-Link. Direcciones 192.168.0.1–3 en subred PN/IE_1.</div>
+      </div>
+    </div>
+    <div class="hw-card">
+      <img src="images/project_tree.png" alt="TIA Portal project tree">
+      <div class="hw-card-caption">
+        <div class="hw-card-title" data-en>Project tree — layered block organisation</div>
+        <div class="hw-card-title" data-es>Árbol de proyecto — organización de bloques por capas</div>
+        <div class="hw-card-desc" data-en>00_System · 01_Commands · 02_Save · 03_Evaluate · 04_IFM_AL1901 · 05_PinGate · 06_Status · 07_Parameters · 08_Libraries. Each layer has a single responsibility.</div>
+        <div class="hw-card-desc" data-es>00_System · 01_Commands · 02_Save · 03_Evaluate · 04_IFM_AL1901 · 05_PinGate · 06_Status · 07_Parameters · 08_Libraries. Cada capa tiene una única responsabilidad.</div>
+      </div>
+    </div>
+    <div class="hw-card">
+      <img src="images/fb_evaluate.png" alt="FB_Evaluate_Motor SCL">
+      <div class="hw-card-caption">
+        <div class="hw-card-title" data-en>FB_Evaluate_Motor — SCL evaluation logic</div>
+        <div class="hw-card-title" data-es>FB_Evaluate_Motor — lógica de evaluación SCL</div>
+        <div class="hw-card-desc" data-en>Compares live sensor data against configurable thresholds. Outputs pre-alarm and alarm flags per parameter, global motor alarm, new-alarm edge detection, and stop/siren commands.</div>
+        <div class="hw-card-desc" data-es>Compara datos del sensor en tiempo real con umbrales configurables. Genera flags de prealarma y alarma por parámetro, alarma global del motor, detección de flanco de nueva alarma y comandos de parada/sirena.</div>
+      </div>
+    </div>
+    <div class="hw-card">
+      <img src="images/fb_save_parameters.png" alt="FB_Save_Parameters SCL state machine">
+      <div class="hw-card-caption">
+        <div class="hw-card-title" data-en>FB_Save_Parameters — write-on-change state machine</div>
+        <div class="hw-card-title" data-es>FB_Save_Parameters — máquina de estados write-on-change</div>
+        <div class="hw-card-desc" data-en>SCL state machine: Idle → Saving → Saved. Copies HMI edit DB to retentive parameter DB on operator Save command. Shows "Guardando..." feedback during the operation.</div>
+        <div class="hw-card-desc" data-es>Máquina de estados SCL: Idle → Guardando → Guardado. Copia el DB de edición HMI al DB de parámetros retentivo al pulsar Guardar. Muestra feedback "Guardando..." durante la operación.</div>
+      </div>
+    </div>
+    <div class="hw-card">
+      <img src="images/output_alarm.png" alt="Ladder alarm output logic">
+      <div class="hw-card-caption">
+        <div class="hw-card-title" data-en>Main OB1 — alarm output ladder (Network 11)</div>
+        <div class="hw-card-title" data-es>OB1 principal — ladder de salidas de alarma (Red 11)</div>
+        <div class="hw-card-desc" data-en>Pre-alarm LED outputs (%Q0.0, %Q0.2) driven by OR of all four motors' pre-alarm flags. Zone siren outputs (%Q0.1, %Q0.3) gated by siren flag AND NOT silence, with silence-activated interlock.</div>
+        <div class="hw-card-desc" data-es>Salidas LED de prealarma (%Q0.0, %Q0.2) activadas por OR de las flags de prealarma de los cuatro motores. Salidas de sirena de zona (%Q0.1, %Q0.3) condicionadas por flag de sirena AND NOT silencio, con enclavamiento de silencio activado.</div>
+      </div>
+    </div>
+    <div class="hw-card">
+      <img src="images/main_screen.png" alt="HMI main screen in TIA Portal editor">
+      <div class="hw-card-caption">
+        <div class="hw-card-title" data-en>HMI design — TIA Portal WinCC editor</div>
+        <div class="hw-card-title" data-es>Diseño HMI — editor WinCC de TIA Portal</div>
+        <div class="hw-card-desc" data-en>Main screen layout in WinCC Unified editor: two production zones (Onduladora / Converting), four motor objects with dynamic colour bindings, Silenciar and Reset buttons, and navigation to settings.</div>
+        <div class="hw-card-desc" data-es>Diseño de pantalla principal en editor WinCC Unified: dos zonas de producción (Onduladora / Converting), cuatro objetos de motor con binding de color dinámico, botones Silenciar y Reset, y navegación a configuraciones.</div>
       </div>
     </div>
   </div>
 
   <div class="hw-specs">
-    <div class="spec-card">
-      <div class="spec-card-label">PLC</div>
-      <div class="spec-card-value">Siemens S7-1200<br><small style="color:var(--muted);font-size:12px">CPU 1214C DC/DC/DC</small></div>
-    </div>
-    <div class="spec-card">
-      <div class="spec-card-label">HMI</div>
-      <div class="spec-card-value">Siemens MTP700<br><small style="color:var(--muted);font-size:12px">Unified Basic</small></div>
-    </div>
-    <div class="spec-card">
-      <div class="spec-card-label">IO-Link Master</div>
-      <div class="spec-card-value">IFM AL1901<br><small style="color:var(--muted);font-size:12px">PROFINET GSD device</small></div>
-    </div>
-    <div class="spec-card">
-      <div class="spec-card-label">Sensors (×4)</div>
-      <div class="spec-card-value">IFM VVB306<br><small style="color:var(--muted);font-size:12px">Vibration + Temperature IO-Link</small></div>
-    </div>
-    <div class="spec-card">
-      <div class="spec-card-label">Network</div>
-      <div class="spec-card-value">PROFINET<br><small style="color:var(--muted);font-size:12px">192.168.0.x subnet</small></div>
-    </div>
-    <div class="spec-card">
-      <div class="spec-card-label">Programming</div>
-      <div class="spec-card-value">TIA Portal V20<br><small style="color:var(--muted);font-size:12px">Ladder + SCL + FBD</small></div>
-    </div>
+    <div class="spec-card"><div class="spec-card-label" data-en>PLC</div><div class="spec-card-label" data-es>PLC</div><div class="spec-card-value">Siemens S7-1200<br><small style="color:var(--muted);font-size:11px">CPU 1214C DC/DC/DC</small></div></div>
+    <div class="spec-card"><div class="spec-card-label" data-en>HMI</div><div class="spec-card-label" data-es>HMI</div><div class="spec-card-value">Siemens MTP700<br><small style="color:var(--muted);font-size:11px">Unified Basic</small></div></div>
+    <div class="spec-card"><div class="spec-card-label" data-en>IO-Link Master</div><div class="spec-card-label" data-es>Maestro IO-Link</div><div class="spec-card-value">IFM AL1901<br><small style="color:var(--muted);font-size:11px">PROFINET GSD device</small></div></div>
+    <div class="spec-card"><div class="spec-card-label" data-en>Sensors ×4</div><div class="spec-card-label" data-es>Sensores ×4</div><div class="spec-card-value">IFM VVB306<br><small style="color:var(--muted);font-size:11px">v-RMS · a-Peak · Temp</small></div></div>
+    <div class="spec-card"><div class="spec-card-label">Network</div><div class="spec-card-value">PROFINET<br><small style="color:var(--muted);font-size:11px">192.168.0.x</small></div></div>
+    <div class="spec-card"><div class="spec-card-label" data-en>Programming</div><div class="spec-card-label" data-es>Programación</div><div class="spec-card-value">TIA Portal V20<br><small style="color:var(--muted);font-size:11px">Ladder · SCL · FBD</small></div></div>
   </div>
 </section>
 
 <!-- ── SIMULATOR ── -->
 <section id="simulator">
-  <div class="section-label">02 · Simulator</div>
-  <h2 class="section-title">PySide6 desktop application</h2>
-  <p class="section-desc">
-    A full PySide6 desktop application manages the entire stack — MQTT broker, InfluxDB writer, analytics engine, and PLC collector — as supervised subprocesses. The simulator generates realistic sensor data for all four motors with configurable fault scenarios, enabling full testing without physical hardware.
-  </p>
+  <div class="section-label" data-en>02 · Simulator</div>
+  <div class="section-label" data-es>02 · Simulador</div>
+  <h2 class="section-title" data-en>PySide6 desktop application</h2>
+  <h2 class="section-title" data-es>Aplicación de escritorio PySide6</h2>
+
+  <div class="section-desc" data-en>
+    <p>The entire MotorWatch IQ stack is controlled from a single PySide6 desktop application. Rather than running services manually from terminals, all subprocesses — Mosquitto MQTT broker, InfluxDB writer, and the analytics engine — are managed as supervised child processes via <code style="font-family:var(--mono);color:var(--accent2);font-size:13px">subprocess.Popen</code>, with stdout piped to the launcher console in real time. Process termination uses <code style="font-family:var(--mono);color:var(--accent2);font-size:13px">taskkill /F /T /PID</code> to cleanly kill the full process tree on Windows.</p>
+    <p>The simulator tab allows injecting realistic fault scenarios per motor — thermal drift, vibration drift, impact spike, device failure — without requiring physical hardware. This simulator-first approach enabled developing and validating the entire analytics pipeline (M1–M8) before PLC integration. Each motor card shows live published values with AUTO/MANUAL mode and a configurable fault scenario selector.</p>
+    <p>Design decisions: Qt signals/slots for thread-safe UI updates from subprocess readers; <code style="font-family:var(--mono);color:var(--accent2);font-size:13px">QThread</code> workers for InfluxDB queries to prevent UI freezing; Catppuccin Mocha palette applied consistently across all tabs and the generated HTML reports for visual cohesion; status LED dots driven by stdout parsing of subprocess output.</p>
+  </div>
+  <div class="section-desc" data-es>
+    <p>Todo el stack de MotorWatch IQ se controla desde una única aplicación de escritorio PySide6. En lugar de ejecutar servicios manualmente desde terminales, todos los subprocesos — broker MQTT Mosquitto, escritor InfluxDB y motor analítico — se gestionan como procesos hijo supervisados mediante <code style="font-family:var(--mono);color:var(--accent2);font-size:13px">subprocess.Popen</code>, con stdout redirigido a la consola del launcher en tiempo real.</p>
+    <p>La pestaña simulador permite inyectar escenarios de fallo realistas por motor — deriva térmica, deriva de vibración, pico de impacto, fallo de dispositivo — sin necesidad de hardware físico. Este enfoque simulator-first permitió desarrollar y validar todo el pipeline analítico antes de la integración con el PLC.</p>
+    <p>Decisiones de diseño: señales/slots Qt para actualizaciones seguras del hilo UI; workers <code style="font-family:var(--mono);color:var(--accent2);font-size:13px">QThread</code> para consultas InfluxDB; paleta Catppuccin Mocha aplicada consistentemente en todas las pestañas y los informes HTML generados.</p>
+  </div>
 
   <div class="screenshot-grid">
     <div class="screenshot-item">
-      <img src="images/launcher.png" alt="MotorWatch IQ — Launcher tab">
+      <img src="images/launcher.png" alt="Launcher tab">
       <div class="screenshot-caption">
-        <strong>Launcher tab</strong>
-        <span>Service orchestration with live status dots. Simulator / OPC UA / Snap7 data source selection.</span>
+        <strong data-en>Launcher — service orchestration</strong>
+        <strong data-es>Launcher — orquestación de servicios</strong>
+        <span data-en>Live status dots per service. Data source selector: Simulator / OPC UA / Snap7. Console output with real-time subprocess logs. Start All / Stop All with clean process tree termination.</span>
+        <span data-es>Puntos de estado en vivo por servicio. Selector de fuente de datos: Simulador / OPC UA / Snap7. Salida de consola con logs de subprocesos en tiempo real. Start All / Stop All con terminación limpia del árbol de procesos.</span>
       </div>
     </div>
     <div class="screenshot-item">
-      <img src="images/simulator.png" alt="MotorWatch IQ — Simulator tab">
+      <img src="images/simulator.png" alt="Simulator tab">
       <div class="screenshot-caption">
-        <strong>Simulator tab</strong>
-        <span>4 motor cards with AUTO/MANUAL mode, configurable fault scenarios: normal, thermal drift, vibration drift, impact spike.</span>
+        <strong data-en>Simulator — fault scenario injection</strong>
+        <strong data-es>Simulador — inyección de escenarios de fallo</strong>
+        <span data-en>4 motor cards with AUTO/MANUAL mode toggle. Fault scenarios: Normal, Thermal drift, Vibration drift, Impact spike. Live v-RMS, a-Peak, Temp sliders. MQTT publish interval control. Motor 3 in ALARM state shown.</span>
+        <span data-es>4 tarjetas de motor con toggle AUTO/MANUAL. Escenarios de fallo: Normal, Deriva térmica, Deriva de vibración, Pico de impacto. Controles deslizantes en vivo de v-RMS, a-Pico, Temp. Motor 3 en estado ALARM mostrado.</span>
       </div>
     </div>
     <div class="screenshot-item">
-      <img src="images/settings.png" alt="MotorWatch IQ — Settings tab">
+      <img src="images/settings.png" alt="Settings tab">
       <div class="screenshot-caption">
-        <strong>Settings tab — connections</strong>
-        <span>OPC UA primary (IEC 62541) at opc.tcp://192.168.0.10:4840, Snap7 fallback. ISO 20816-3 threshold presets.</span>
+        <strong data-en>Settings — connections & ISO thresholds</strong>
+        <strong data-es>Configuración — conexiones y umbrales ISO</strong>
+        <span data-en>OPC UA primary connection (IEC 62541) at opc.tcp://192.168.0.10:4840 with security policy and optional credentials. Snap7 fallback with rack/slot/poll interval. ISO 20816-3 threshold presets via Reset to ISO defaults button.</span>
+        <span data-es>Conexión primaria OPC UA (IEC 62541) en opc.tcp://192.168.0.10:4840 con política de seguridad y credenciales opcionales. Fallback Snap7 con rack/slot/intervalo de polling. Preajustes de umbrales ISO 20816-3 mediante botón Reset to ISO defaults.</span>
       </div>
     </div>
     <div class="screenshot-item">
-      <img src="images/analytics.png" alt="MotorWatch IQ — Analytics tab">
+      <img src="images/analytics.png" alt="Analytics tab">
       <div class="screenshot-caption">
-        <strong>Analytics tab</strong>
-        <span>Live anomaly scores, v-RMS sparklines per motor, active alert list, and prioritised intervention plan.</span>
+        <strong data-en>Analytics — live scores & intervention plan</strong>
+        <strong data-es>Analytics — puntuaciones en vivo y plan de intervención</strong>
+        <span data-en>Real-time Isolation Forest anomaly scores per motor (0.0–1.0). v-RMS sparklines for last 5 minutes. Active alert list with duration and ISO threshold exceeded. Auto-generated prioritised intervention plan. Generate Report and Open Latest buttons.</span>
+        <span data-es>Puntuaciones de anomalía Isolation Forest en tiempo real por motor (0.0–1.0). Sparklines v-RMS de los últimos 5 minutos. Lista de alertas activas con duración y umbral ISO superado. Plan de intervención priorizado generado automáticamente. Botones Generate Report y Open Latest.</span>
       </div>
+    </div>
+  </div>
+
+  <div class="decisions-grid" style="margin-top:32px">
+    <div class="decision-card">
+      <div class="decision-title" data-en>Subprocess management over services</div>
+      <div class="decision-title" data-es>Gestión de subprocesos en lugar de servicios</div>
+      <div class="decision-body" data-en>Mosquitto and InfluxDB are launched as child processes rather than Windows services. This gives the application full lifecycle control — start, monitor, and stop — without requiring elevated privileges or system-wide configuration changes.</div>
+      <div class="decision-body" data-es>Mosquitto e InfluxDB se lanzan como procesos hijo en lugar de servicios Windows. Esto da a la aplicación control total del ciclo de vida — inicio, monitorización y parada — sin requerir privilegios elevados ni cambios de configuración a nivel del sistema.</div>
+    </div>
+    <div class="decision-card teal">
+      <div class="decision-title" data-en>QThread for InfluxDB queries</div>
+      <div class="decision-title" data-es>QThread para consultas InfluxDB</div>
+      <div class="decision-body" data-en>All InfluxDB read operations run in QThread workers, emitting results via Qt signals. This keeps the UI thread free, preventing freezing during slow queries. The pattern is applied consistently across the Analytics tab sparklines and the anomaly score cards.</div>
+      <div class="decision-body" data-es>Todas las operaciones de lectura InfluxDB se ejecutan en workers QThread, emitiendo resultados mediante señales Qt. Esto mantiene el hilo UI libre, evitando congelaciones durante consultas lentas. El patrón se aplica de forma consistente en los sparklines de la pestaña Analytics y las tarjetas de puntuación de anomalías.</div>
+    </div>
+    <div class="decision-card green">
+      <div class="decision-title" data-en>Simulator-first development</div>
+      <div class="decision-title" data-es>Desarrollo simulator-first</div>
+      <div class="decision-body" data-en>The full analytics pipeline — MQTT ingestion, InfluxDB storage, anomaly detection, report generation — was built and validated using the simulator before any PLC was connected. This separation allowed rapid iteration on the software stack independently of hardware availability.</div>
+      <div class="decision-body" data-es>Todo el pipeline analítico — ingesta MQTT, almacenamiento InfluxDB, detección de anomalías, generación de informes — se construyó y validó con el simulador antes de conectar ningún PLC. Esta separación permitió iterar rápidamente en el stack de software independientemente de la disponibilidad del hardware.</div>
+    </div>
+    <div class="decision-card mauve">
+      <div class="decision-title" data-en>Catppuccin Mocha — unified visual identity</div>
+      <div class="decision-title" data-es>Catppuccin Mocha — identidad visual unificada</div>
+      <div class="decision-body" data-en>The Catppuccin Mocha palette was applied consistently across the PySide6 UI, Grafana dashboards, and the generated HTML maintenance reports. The same motor colours (blue/yellow/red/peach) appear in every layer of the stack, making it immediately clear which motor is which at any view.</div>
+      <div class="decision-body" data-es>La paleta Catppuccin Mocha se aplicó de forma consistente en la UI PySide6, los dashboards de Grafana y los informes HTML de mantenimiento generados. Los mismos colores de motor (azul/amarillo/rojo/melocotón) aparecen en cada capa del stack, haciendo inmediatamente claro qué motor es cuál en cualquier vista.</div>
     </div>
   </div>
 </section>
 
 <!-- ── COMMUNICATION ── -->
 <section id="communication">
-  <div class="section-label">03 · Communication</div>
-  <h2 class="section-title">IIoT data pipeline</h2>
-  <p class="section-desc">
-    OPC UA (IEC 62541) was chosen as the primary PLC interface for its native support on S7-1200 firmware ≥ 4.1 and its status as the Industry 4.0 standard for interoperability. Snap7 provides a fallback for environments without OPC UA enabled. All sensor data flows through MQTT to InfluxDB for time-series storage.
-  </p>
+  <div class="section-label" data-en>03 · Communication</div>
+  <div class="section-label" data-es>03 · Comunicación</div>
+  <h2 class="section-title" data-en>Industrial IoT data pipeline</h2>
+  <h2 class="section-title" data-es>Pipeline de datos Industrial IoT</h2>
+
+  <div class="section-desc" data-en>
+    <p>OPC UA (IEC 62541) was chosen as the primary PLC interface. Unlike Snap7 which uses an undocumented Siemens protocol, OPC UA is the Industry 4.0 standard for machine-to-machine communication, natively supported on S7-1200 firmware ≥ 4.1 without additional hardware. The implementation uses <code style="font-family:var(--mono);color:var(--accent2);font-size:13px">asyncua</code> with async/await and DataChange subscriptions — the PLC pushes updates rather than the collector polling, reducing network overhead and latency.</p>
+    <p>Snap7 is implemented as a hot-standby fallback. If the OPC UA connection fails, the collector automatically switches to Snap7 direct S7 communication using the same exponential backoff reconnection logic (ceiling 60 s). The MQTT payload schema is identical for both paths, making the switch transparent to all downstream consumers.</p>
+    <p>InfluxDB 2.7 with Flux query language was chosen over InfluxDB 1.x for its native support for windowed aggregations, data downsampling tasks, and the <code style="font-family:var(--mono);color:var(--accent2);font-size:13px">influxdb-client-python</code> SDK with <code style="font-family:var(--mono);color:var(--accent2);font-size:13px">CallbackAPIVersion.VERSION2</code>. Tags (motor_id) enable efficient per-motor filtering without scanning all series.</p>
+  </div>
+  <div class="section-desc" data-es>
+    <p>Se eligió OPC UA (IEC 62541) como interfaz PLC principal. A diferencia de Snap7, que usa un protocolo propietario de Siemens, OPC UA es el estándar de Industry 4.0 para comunicación máquina a máquina, soportado de forma nativa en firmware S7-1200 ≥ 4.1 sin hardware adicional. La implementación usa <code style="font-family:var(--mono);color:var(--accent2);font-size:13px">asyncua</code> con async/await y suscripciones DataChange — el PLC envía actualizaciones en lugar de que el colector haga polling.</p>
+    <p>Snap7 se implementa como fallback en caliente. Si la conexión OPC UA falla, el colector cambia automáticamente a comunicación directa S7 con la misma lógica de reconexión con backoff exponencial (techo 60 s). El esquema de payload MQTT es idéntico para ambas rutas, haciendo el cambio transparente para todos los consumidores downstream.</p>
+    <p>InfluxDB 2.7 con Flux se eligió por su soporte nativo de agregaciones por ventana, tareas de downsampling, y el SDK <code style="font-family:var(--mono);color:var(--accent2);font-size:13px">influxdb-client-python</code>. Los tags (motor_id) permiten filtrado eficiente por motor sin escanear todas las series.</p>
+  </div>
 
   <div class="arch-diagram">
     <div class="arch-flow">
-      <div class="arch-node arch-node-plc">
-        <div class="arch-node-label">S7-1200</div>
-        <div class="arch-node-sub">IFM VVB306 × 4</div>
-      </div>
+      <div class="arch-node arch-node-plc"><div class="arch-node-label">S7-1200</div><div class="arch-node-sub">IFM VVB306 ×4</div></div>
       <div class="arch-arrow">→</div>
-      <div class="arch-node arch-node-plc">
-        <div class="arch-node-label">OPC UA</div>
-        <div class="arch-node-sub">IEC 62541 · Port 4840</div>
-      </div>
+      <div class="arch-node arch-node-plc"><div class="arch-node-label">OPC UA</div><div class="arch-node-sub">IEC 62541 · 4840</div></div>
       <div class="arch-arrow">→</div>
-      <div class="arch-node">
-        <div class="arch-node-label">plc_collector.py</div>
-        <div class="arch-node-sub">asyncua · Snap7 fallback</div>
-      </div>
+      <div class="arch-node"><div class="arch-node-label">plc_collector</div><div class="arch-node-sub">asyncua · Snap7 ↓</div></div>
       <div class="arch-arrow">→</div>
-      <div class="arch-node">
-        <div class="arch-node-label">Mosquitto</div>
-        <div class="arch-node-sub">MQTT · Port 1883</div>
-      </div>
+      <div class="arch-node"><div class="arch-node-label">Mosquitto</div><div class="arch-node-sub">MQTT · 1883</div></div>
       <div class="arch-arrow">→</div>
-      <div class="arch-node arch-node-db">
-        <div class="arch-node-label">influx_writer.py</div>
-        <div class="arch-node-sub">MQTT → InfluxDB</div>
-      </div>
+      <div class="arch-node arch-node-db"><div class="arch-node-label">influx_writer</div><div class="arch-node-sub">MQTT → InfluxDB</div></div>
       <div class="arch-arrow">→</div>
-      <div class="arch-node arch-node-db">
-        <div class="arch-node-label">InfluxDB v2</div>
-        <div class="arch-node-sub">bucket: motors</div>
-      </div>
+      <div class="arch-node arch-node-db"><div class="arch-node-label">InfluxDB v2</div><div class="arch-node-sub">bucket: motors</div></div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-node arch-node-ml"><div class="arch-node-label">anomaly_detector</div><div class="arch-node-sub">Isolation Forest</div></div>
     </div>
   </div>
 
   <div class="hw-specs">
-    <div class="spec-card">
-      <div class="spec-card-label">Primary protocol</div>
-      <div class="spec-card-value">OPC UA<br><small style="color:var(--muted);font-size:12px">IEC 62541 · asyncua lib</small></div>
-    </div>
-    <div class="spec-card">
-      <div class="spec-card-label">Fallback protocol</div>
-      <div class="spec-card-value">Snap7<br><small style="color:var(--muted);font-size:12px">Direct S7 comms</small></div>
-    </div>
-    <div class="spec-card">
-      <div class="spec-card-label">Message broker</div>
-      <div class="spec-card-value">Mosquitto<br><small style="color:var(--muted);font-size:12px">MQTT 3.1.1 · Port 1883</small></div>
-    </div>
-    <div class="spec-card">
-      <div class="spec-card-label">Time-series DB</div>
-      <div class="spec-card-value">InfluxDB 2.7.12<br><small style="color:var(--muted);font-size:12px">Flux query language</small></div>
-    </div>
-    <div class="spec-card">
-      <div class="spec-card-label">Reconnection</div>
-      <div class="spec-card-value">Exponential backoff<br><small style="color:var(--muted);font-size:12px">Up to 60 s ceiling</small></div>
-    </div>
-    <div class="spec-card">
-      <div class="spec-card-label">Payload</div>
-      <div class="spec-card-value">JSON over MQTT<br><small style="color:var(--muted);font-size:12px">v-RMS · a-Peak · Temp · status</small></div>
-    </div>
+    <div class="spec-card"><div class="spec-card-label" data-en>Primary</div><div class="spec-card-label" data-es>Primario</div><div class="spec-card-value">OPC UA<br><small style="color:var(--muted);font-size:11px">IEC 62541 · asyncua</small></div></div>
+    <div class="spec-card"><div class="spec-card-label" data-en>Fallback</div><div class="spec-card-label" data-es>Fallback</div><div class="spec-card-value">Snap7<br><small style="color:var(--muted);font-size:11px">Direct S7 comms</small></div></div>
+    <div class="spec-card"><div class="spec-card-label" data-en>Broker</div><div class="spec-card-label" data-es>Broker</div><div class="spec-card-value">Mosquitto<br><small style="color:var(--muted);font-size:11px">MQTT 3.1.1 · 1883</small></div></div>
+    <div class="spec-card"><div class="spec-card-label" data-en>Time-series DB</div><div class="spec-card-label" data-es>BD series temporales</div><div class="spec-card-value">InfluxDB 2.7.12<br><small style="color:var(--muted);font-size:11px">Flux · bucket: motors</small></div></div>
+    <div class="spec-card"><div class="spec-card-label" data-en>Reconnection</div><div class="spec-card-label" data-es>Reconexión</div><div class="spec-card-value">Exponential backoff<br><small style="color:var(--muted);font-size:11px">ceiling 60 s</small></div></div>
+    <div class="spec-card"><div class="spec-card-label">Payload</div><div class="spec-card-value">JSON / MQTT<br><small style="color:var(--muted);font-size:11px">v-RMS · a-Peak · Temp · status</small></div></div>
   </div>
 </section>
 
 <!-- ── ANALYTICS ── -->
 <section id="analytics">
-  <div class="section-label">04 · Analytics</div>
-  <h2 class="section-title">Grafana dashboards & reports</h2>
-  <p class="section-desc">
-    Two Grafana dashboards provide real-time and historical visibility. The sensor dashboard shows alarm state timelines, current readings, and v-RMS trends. The anomaly dashboard visualises ML scores, alert levels, trend slopes, and fault classification per motor.
-  </p>
+  <div class="section-label" data-en>04 · Analytics</div>
+  <div class="section-label" data-es>04 · Análisis</div>
+  <h2 class="section-title" data-en>Grafana dashboards & maintenance reports</h2>
+  <h2 class="section-title" data-es>Dashboards Grafana e informes de mantenimiento</h2>
 
-  <div class="screenshot-grid" style="margin-bottom: 40px;">
+  <div class="section-desc" data-en>
+    <p>Two Grafana 13 dashboards provide real-time and analytical visibility. The <strong style="color:var(--text)">sensor dashboard</strong> (MotorWatch IQ) shows alarm state timelines for all four motors, current v-RMS and a-Peak stat panels with ISO 20816-3 colour thresholds, temperature gauges, and a v-RMS time series sparkline — refreshed every 5 seconds. The <strong style="color:var(--text)">anomaly dashboard</strong> (Motor Anomaly) shows Isolation Forest scores, alert level state timelines, trend slopes in mm/s/h, and a CWRU-based fault classification table with fault probability bars.</p>
+    <p>The Grafana sensor data model uses both numeric fields (<code style="font-family:var(--mono);color:var(--accent2);font-size:13px">alarm_state_num</code> 0–3) and string fields (<code style="font-family:var(--mono);color:var(--accent2);font-size:13px">alarm_state_str</code>) written to the <code style="font-family:var(--mono);color:var(--accent2);font-size:13px">motor_telemetry</code> measurement. The State Timeline panel uses threshold-based numeric colouring, while string fields enable human-readable tooltips. Sentinel values (−1.0) are written for fault/offline states rather than dropping the point, preserving timeline continuity.</p>
+  </div>
+  <div class="section-desc" data-es>
+    <p>Dos dashboards de Grafana 13 proporcionan visibilidad en tiempo real y analítica. El <strong style="color:var(--text)">dashboard de sensores</strong> muestra líneas temporales de estado de alarma, paneles de estadísticas de v-RMS y a-Pico con umbrales de color ISO 20816-3, indicadores de temperatura y sparklines de series temporales — actualizado cada 5 segundos. El <strong style="color:var(--text)">dashboard de anomalías</strong> muestra puntuaciones Isolation Forest, líneas de nivel de alerta, pendientes de tendencia en mm/s/h y una tabla de clasificación de fallos basada en CWRU.</p>
+    <p>El modelo de datos usa tanto campos numéricos (<code style="font-family:var(--mono);color:var(--accent2);font-size:13px">alarm_state_num</code> 0–3) como campos de cadena (<code style="font-family:var(--mono);color:var(--accent2);font-size:13px">alarm_state_str</code>). Se escriben valores sentinel (−1.0) para estados de fallo/offline en lugar de descartar el punto, preservando la continuidad de la línea temporal.</p>
+  </div>
+
+  <div class="screenshot-grid" style="margin-bottom:40px">
     <div class="screenshot-item">
-      <img src="images/sensors_grafana.png" alt="Grafana — MotorWatch IQ sensor dashboard">
+      <img src="images/sensors_grafana.png" alt="Grafana sensor dashboard">
       <div class="screenshot-caption">
-        <strong>Sensor dashboard</strong>
-        <span>Alarm state timeline, current v-RMS and a-Peak stats, temperature gauges, v-RMS time series — 5s auto-refresh.</span>
+        <strong data-en>Sensor dashboard — MotorWatch IQ</strong>
+        <strong data-es>Dashboard de sensores — MotorWatch IQ</strong>
+        <span data-en>Alarm state timeline (State Timeline panel, threshold-based colouring), current v-RMS and a-Peak stats with ISO colour thresholds, temperature gauges for all 4 motors, v-RMS time series — 5 s auto-refresh.</span>
+        <span data-es>Línea temporal de estado de alarma (panel State Timeline, coloreado por umbral), estadísticas actuales de v-RMS y a-Pico con umbrales de color ISO, indicadores de temperatura para los 4 motores, series temporales v-RMS — refresco automático 5 s.</span>
       </div>
     </div>
     <div class="screenshot-item">
-      <img src="images/analytics_grafana.png" alt="Grafana — Motor Anomaly dashboard">
+      <img src="images/analytics_grafana.png" alt="Grafana anomaly dashboard">
       <div class="screenshot-caption">
-        <strong>Motor Anomaly dashboard</strong>
-        <span>Isolation Forest anomaly scores, alert level state timeline, trend slope (mm/s/h), and CWRU-based fault classification table.</span>
+        <strong data-en>Anomaly dashboard — Motor Anomaly</strong>
+        <strong data-es>Dashboard de anomalías — Motor Anomaly</strong>
+        <span data-en>Isolation Forest anomaly scores (0.0–1.0), alert level state timeline (ok/watch/critical), trend slope time series (mm/s/h), CWRU fault classification table with fault probability bars and fault_type (normal/thermal/ball_fault).</span>
+        <span data-es>Puntuaciones Isolation Forest (0.0–1.0), línea temporal de nivel de alerta (ok/watch/critical), series temporales de pendiente de tendencia (mm/s/h), tabla de clasificación de fallos CWRU con barras de probabilidad y fault_type (normal/thermal/ball_fault).</span>
       </div>
     </div>
   </div>
 
-  <!-- Report embed -->
-  <div class="section-label" style="margin-bottom:12px">Maintenance report — live output</div>
-  <p style="color:var(--subtext);font-size:14px;margin-bottom:16px">
-    Auto-generated HTML report — bilingual EN/ES, Catppuccin Mocha theme, ISO 20816-3 thresholds. Toggle language inline.
-  </p>
+  <div class="section-label" style="margin-bottom:12px" data-en>Maintenance report — bilingual live output</div>
+  <div class="section-label" style="margin-bottom:12px" data-es>Informe de mantenimiento — salida bilingüe en vivo</div>
+  <p style="color:var(--subtext);font-size:14px;margin-bottom:16px" data-en>Auto-generated HTML report with executive summary, intervention plan, and alert history. Bilingual EN/ES, IBM Plex typography, Catppuccin Mocha theme, ISO 20816-3 thresholds. Toggle language inline.</p>
+  <p style="color:var(--subtext);font-size:14px;margin-bottom:16px" data-es>Informe HTML generado automáticamente con resumen ejecutivo, plan de intervención e historial de alertas. Bilingüe EN/ES, tipografía IBM Plex, tema Catppuccin Mocha, umbrales ISO 20816-3. Cambio de idioma en línea.</p>
   <div class="report-embed-wrapper">
     <div class="report-tabs">
       <button class="report-tab active" onclick="switchReport('en', this)">English</button>
@@ -931,58 +635,49 @@ footer {
 
 <!-- ── INTELLIGENCE ── -->
 <section id="intelligence">
-  <div class="section-label">05 · Intelligence</div>
-  <h2 class="section-title">Machine learning pipeline</h2>
-  <p class="section-desc">
-    The analytics engine combines unsupervised anomaly detection (Isolation Forest) with trend analysis and CWRU-dataset fault classification. It runs as a persistent process reading from InfluxDB, writing scores and fault types back to the <code style="font-family:var(--mono);font-size:13px;color:var(--accent2)">motor_anomaly</code> measurement every 30 seconds.
-  </p>
+  <div class="section-label" data-en>05 · Intelligence</div>
+  <div class="section-label" data-es>05 · Inteligencia</div>
+  <h2 class="section-title" data-en>Machine learning analytics pipeline</h2>
+  <h2 class="section-title" data-es>Pipeline analítico de machine learning</h2>
 
-  <div class="ml-pipeline">
-    <div class="ml-step">
-      <div class="ml-step-num">01</div>
-      <div class="ml-step-title">Data ingestion</div>
-      <div class="ml-step-desc">Reads v-RMS, a-Peak, temperature windows from InfluxDB Flux queries over configurable time ranges.</div>
-    </div>
-    <div class="ml-step">
-      <div class="ml-step-num">02</div>
-      <div class="ml-step-title">Isolation Forest</div>
-      <div class="ml-step-desc">Unsupervised anomaly scoring (0.0–1.0) trained on CWRU bearing dataset. No labelled fault data required.</div>
-    </div>
-    <div class="ml-step">
-      <div class="ml-step-num">03</div>
-      <div class="ml-step-title">Trend analysis</div>
-      <div class="ml-step-desc">Linear regression on v-RMS time windows. Outputs slope (mm/s/h) and ETA to pre-alarm and alarm thresholds.</div>
-    </div>
-    <div class="ml-step">
-      <div class="ml-step-num">04</div>
-      <div class="ml-step-title">Fault classification</div>
-      <div class="ml-step-desc">Frequency-domain classifier trained on CWRU: normal, inner race, outer race, ball fault. Outputs fault_type + probability.</div>
-    </div>
-    <div class="ml-step">
-      <div class="ml-step-num">05</div>
-      <div class="ml-step-title">Alert management</div>
-      <div class="ml-step-desc">Threshold logic: OK → WATCH → WARNING → CRITICAL. Hysteresis prevents alert flapping. Windows notification on CRITICAL.</div>
-    </div>
-    <div class="ml-step">
-      <div class="ml-step-num">06</div>
-      <div class="ml-step-title">Report generation</div>
-      <div class="ml-step-desc">Bilingual HTML report (EN/ES) with executive summary, intervention plan, and alert history. Auto-generated on schedule.</div>
-    </div>
+  <div class="section-desc" data-en>
+    <p>The analytics engine (<code style="font-family:var(--mono);color:var(--accent2);font-size:13px">anomaly_detector.py</code>) runs as a persistent supervised process, reading time-windowed sensor data from InfluxDB every 30 seconds and writing results to the <code style="font-family:var(--mono);color:var(--accent2);font-size:13px">motor_anomaly</code> measurement. The pipeline combines three independent analytical methods: unsupervised anomaly detection, statistical trend analysis, and supervised fault classification.</p>
+    <p>The <strong style="color:var(--text)">Isolation Forest</strong> model is trained on the CWRU (Case Western Reserve University) bearing dataset, a widely-used benchmark for rotating machinery fault detection. Training produces a model per motor that scores incoming windows from 0.0 (normal) to 1.0 (anomalous). No labelled fault data from the target machines is required — the model learns the normal operating envelope and scores deviations from it.</p>
+    <p>The <strong style="color:var(--text)">trend analyser</strong> applies linear regression to rolling v-RMS windows, computing slope in mm/s/h and projecting ETA to pre-alarm and alarm thresholds. This transforms reactive alarming into predictive maintenance: the system can warn of a developing fault hours before the threshold is breached. Alert hysteresis prevents flapping between states on noisy signals.</p>
+    <p>The <strong style="color:var(--text)">fault classifier</strong> uses frequency-domain features from the CWRU dataset to identify fault type — normal, inner race fault, outer race fault, or ball fault — with a probability score. The generated maintenance report combines all three outputs into a prioritised intervention plan with specific recommended actions per fault type, following ISO 20816-3 severity categories.</p>
+  </div>
+  <div class="section-desc" data-es>
+    <p>El motor analítico (<code style="font-family:var(--mono);color:var(--accent2);font-size:13px">anomaly_detector.py</code>) se ejecuta como proceso supervisado persistente, leyendo datos de sensores por ventana temporal de InfluxDB cada 30 segundos y escribiendo resultados en la medición <code style="font-family:var(--mono);color:var(--accent2);font-size:13px">motor_anomaly</code>. El pipeline combina tres métodos analíticos independientes: detección de anomalías no supervisada, análisis de tendencia estadístico y clasificación supervisada de fallos.</p>
+    <p>El modelo <strong style="color:var(--text)">Isolation Forest</strong> se entrena con el dataset CWRU (Case Western Reserve University), un benchmark ampliamente utilizado para detección de fallos en maquinaria rotativa. No se requieren datos de fallo etiquetados de las máquinas objetivo — el modelo aprende la envolvente de operación normal y puntúa las desviaciones.</p>
+    <p>El <strong style="color:var(--text)">analizador de tendencias</strong> aplica regresión lineal a ventanas deslizantes de v-RMS, calculando la pendiente en mm/s/h y proyectando el ETA hasta los umbrales de prealarma y alarma. El <strong style="color:var(--text)">clasificador de fallos</strong> utiliza características en el dominio de la frecuencia del dataset CWRU para identificar el tipo de fallo con una puntuación de probabilidad.</p>
   </div>
 
-  <div class="screenshot-grid">
+  <div class="ml-pipeline">
+    <div class="ml-step"><div class="ml-step-num" data-en>STEP 01</div><div class="ml-step-num" data-es>PASO 01</div><div class="ml-step-title" data-en>Data ingestion</div><div class="ml-step-title" data-es>Ingesta de datos</div><div class="ml-step-desc" data-en>Reads v-RMS, a-Peak, temperature time windows from InfluxDB using Flux queries. Configurable window size per analysis type.</div><div class="ml-step-desc" data-es>Lee ventanas temporales de v-RMS, a-Pico y temperatura de InfluxDB con consultas Flux. Tamaño de ventana configurable por tipo de análisis.</div></div>
+    <div class="ml-step"><div class="ml-step-num" data-en>STEP 02</div><div class="ml-step-num" data-es>PASO 02</div><div class="ml-step-title" data-en>Isolation Forest</div><div class="ml-step-title" data-es>Isolation Forest</div><div class="ml-step-desc" data-en>Unsupervised anomaly scoring 0.0–1.0. Trained on CWRU bearing dataset. No labelled fault data required from target machines.</div><div class="ml-step-desc" data-es>Puntuación de anomalías no supervisada 0.0–1.0. Entrenado con dataset CWRU. No requiere datos de fallo etiquetados de las máquinas objetivo.</div></div>
+    <div class="ml-step"><div class="ml-step-num" data-en>STEP 03</div><div class="ml-step-num" data-es>PASO 03</div><div class="ml-step-title" data-en>Trend analysis</div><div class="ml-step-title" data-es>Análisis de tendencia</div><div class="ml-step-desc" data-en>Linear regression on v-RMS windows. Outputs slope (mm/s/h) and ETA to pre-alarm and alarm. Hysteresis prevents alert flapping.</div><div class="ml-step-desc" data-es>Regresión lineal sobre ventanas v-RMS. Genera pendiente (mm/s/h) y ETA a prealarma y alarma. Histéresis previene oscilación de alertas.</div></div>
+    <div class="ml-step"><div class="ml-step-num" data-en>STEP 04</div><div class="ml-step-num" data-es>PASO 04</div><div class="ml-step-title" data-en>Fault classification</div><div class="ml-step-title" data-es>Clasificación de fallos</div><div class="ml-step-desc" data-en>Frequency-domain features from CWRU dataset. Identifies: normal, inner race, outer race, ball fault. Outputs fault_type + probability.</div><div class="ml-step-desc" data-es>Características en dominio de frecuencia del dataset CWRU. Identifica: normal, pista interior, pista exterior, fallo de bola. Genera fault_type + probabilidad.</div></div>
+    <div class="ml-step"><div class="ml-step-num" data-en>STEP 05</div><div class="ml-step-num" data-es>PASO 05</div><div class="ml-step-title" data-en>Alert management</div><div class="ml-step-title" data-es>Gestión de alertas</div><div class="ml-step-desc" data-en>State machine: OK → WATCH → WARNING → CRITICAL. Windows native notification on CRITICAL. Alert duration tracking. 300 s report cooldown.</div><div class="ml-step-desc" data-es>Máquina de estados: OK → WATCH → WARNING → CRITICAL. Notificación nativa Windows en CRITICAL. Seguimiento de duración de alertas. Cooldown de informe 300 s.</div></div>
+    <div class="ml-step"><div class="ml-step-num" data-en>STEP 06</div><div class="ml-step-num" data-es>PASO 06</div><div class="ml-step-title" data-en>Report generation</div><div class="ml-step-title" data-es>Generación de informes</div><div class="ml-step-desc" data-en>Bilingual HTML report: executive summary, intervention plan with specific actions per fault type, alert history. ISO 20816-3 severity categories.</div><div class="ml-step-desc" data-es>Informe HTML bilingüe: resumen ejecutivo, plan de intervención con acciones específicas por tipo de fallo, historial de alertas. Categorías de severidad ISO 20816-3.</div></div>
+  </div>
+
+  <div class="screenshot-grid" style="align-items:start">
     <div class="screenshot-item">
-      <img src="images/analytics_grafana.png" alt="Anomaly scores and fault classification">
+      <img src="images/analytics_grafana.png" alt="Anomaly dashboard">
       <div class="screenshot-caption">
-        <strong>Anomaly scores — Isolation Forest output</strong>
-        <span>Scores 0.0–1.0 across all 4 motors with WATCH/WARNING/CRITICAL thresholds. Fault classification: thermal (M2), ball_fault (M3, M4).</span>
+        <strong data-en>Isolation Forest scores — live output</strong>
+        <strong data-es>Puntuaciones Isolation Forest — salida en vivo</strong>
+        <span data-en>Anomaly scores for all 4 motors (0.0–1.0) with WATCH/WARNING/CRITICAL thresholds. Alert level state timeline showing transitions between ok, watch, and critical. Trend slope panel showing mm/s/h drift per motor. CWRU fault classification table: Motor 1 normal (0.835), Motor 2 thermal (0.894), Motors 3–4 ball_fault (0.510 / 0.970). High fault probability values confirm the anomaly detector and classifier are in agreement.</span>
+        <span data-es>Puntuaciones de anomalía para los 4 motores (0.0–1.0) con umbrales WATCH/WARNING/CRITICAL. Línea temporal de nivel de alerta mostrando transiciones entre ok, watch y critical. Panel de pendiente de tendencia mostrando la deriva mm/s/h por motor. Tabla de clasificación de fallos CWRU: Motor 1 normal (0.835), Motor 2 thermal (0.894), Motores 3–4 ball_fault (0.510 / 0.970). Los valores elevados de probabilidad de fallo confirman la concordancia entre el detector de anomalías y el clasificador.</span>
       </div>
     </div>
     <div class="screenshot-item">
-      <img src="images/analytics.png" alt="Analytics tab — live scores and intervention plan">
+      <img src="images/analytics.png" alt="Analytics tab live">
       <div class="screenshot-caption">
-        <strong>Live analytics in the PySide6 UI</strong>
-        <span>Real-time anomaly scores, v-RMS sparklines, active alerts, and prioritised intervention plan updated every 30 seconds.</span>
+        <strong data-en>Analytics tab — real-time decision support</strong>
+        <strong data-es>Pestaña Analytics — soporte a la decisión en tiempo real</strong>
+        <span data-en>Live anomaly scores, v-RMS sparklines, ISO threshold alerts with duration. Auto-generated intervention plan: IMMEDIATE actions for Motors 2, 3, 4 with specific diagnostic steps. The analyst can generate a full bilingual report with one click.</span>
+        <span data-es>Puntuaciones de anomalía en vivo, sparklines v-RMS, alertas de umbral ISO con duración. Plan de intervención generado automáticamente: acciones INMEDIATAS para Motores 2, 3, 4 con pasos diagnósticos específicos. El analista puede generar un informe bilingüe completo con un clic.</span>
       </div>
     </div>
   </div>
@@ -990,66 +685,43 @@ footer {
 
 <!-- ── ABOUT ── -->
 <section id="about">
-  <div class="section-label">06 · About</div>
+  <div class="section-label" data-en>06 · About</div>
+  <div class="section-label" data-es>06 · Acerca de</div>
   <h2 class="section-title">Fernando Valverde</h2>
-  <p class="section-desc">
-    Industrial automation and electronics engineer with 20+ years of experience in the technology field, developing hardware and software solutions for diverse clients across various market segments. Expertise includes PLCs, HMIs, VFDs, Python (RPA, desktop applications, Django, Flask, Pandas, etc.), and component-level electronics repair and development. Currently building IoT and Industry 4.0 solutions, bridging the gap between factory-floor hardware and modern data infrastructure.
-  </p>
 
   <div class="about-grid">
     <div>
-      <div class="about-skills">
-        <div class="skill-row">
-          <span class="skill-label">Siemens TIA Portal</span>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:95%"></div></div>
-        </div>
-        <div class="skill-row">
-          <span class="skill-label">Python / PySide6</span>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:88%"></div></div>
-        </div>
-        <div class="skill-row">
-          <span class="skill-label">OPC UA / MQTT / IIoT</span>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:85%"></div></div>
-        </div>
-        <div class="skill-row">
-          <span class="skill-label">InfluxDB / Grafana</span>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:82%"></div></div>
-        </div>
-        <div class="skill-row">
-          <span class="skill-label">scikit-learn / ML</span>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:70%"></div></div>
-        </div>
-        <div class="skill-row">
-          <span class="skill-label">Electronics repair</span>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:93%"></div></div>
-        </div>
-        <div class="skill-row">
-          <span class="skill-label">VFDs / Servo drives</span>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:90%"></div></div>
-        </div>
+      <p style="color:var(--subtext);font-size:15px;line-height:1.85;margin-bottom:24px" data-en>
+        Industrial automation and electronics engineer with 20+ years of experience in the technology field, developing hardware and software solutions for diverse clients across various market segments. Expertise includes PLCs, HMIs, VFDs, Python (RPA, desktop applications, Django, Flask, Pandas, etc.), and component-level electronics repair and development. Currently building IoT and Industry 4.0 solutions, bridging the gap between factory-floor hardware and modern data infrastructure.
+      </p>
+      <p style="color:var(--subtext);font-size:15px;line-height:1.85;margin-bottom:24px" data-es>
+        Ingeniero de automatización industrial y electrónica con más de 20 años de experiencia en el sector tecnológico, desarrollando soluciones hardware y software para clientes diversos en distintos segmentos de mercado. Experiencia en PLCs, HMIs, variadores de frecuencia, Python (RPA, aplicaciones de escritorio, Django, Flask, Pandas, etc.) y reparación y desarrollo de electrónica a nivel de componente. Actualmente desarrollando soluciones IoT e Industria 4.0, conectando el hardware de planta con la infraestructura de datos moderna.
+      </p>
+      <p style="color:var(--subtext);font-size:14px;line-height:1.8;margin-bottom:8px" data-en>
+        MotorWatch IQ was built end-to-end across structured development sessions — hardware wiring, PLC/HMI programming, IIoT pipeline design, machine learning model training, and portfolio presentation. Every layer was designed, coded, and tested by one engineer.
+      </p>
+      <p style="color:var(--subtext);font-size:14px;line-height:1.8;margin-bottom:8px" data-es>
+        MotorWatch IQ fue construido de extremo a extremo en sesiones de desarrollo estructuradas — cableado hardware, programación PLC/HMI, diseño del pipeline IIoT, entrenamiento de modelos ML y presentación de portfolio. Cada capa fue diseñada, codificada y probada por un único ingeniero.
+      </p>
+
+      <div class="about-skills" style="margin-top:28px">
+        <div class="skill-row"><span class="skill-label">Siemens TIA Portal</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:95%"></div></div></div>
+        <div class="skill-row"><span class="skill-label">Python / PySide6</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:88%"></div></div></div>
+        <div class="skill-row"><span class="skill-label">OPC UA / MQTT / IIoT</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:85%"></div></div></div>
+        <div class="skill-row"><span class="skill-label">InfluxDB / Grafana</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:82%"></div></div></div>
+        <div class="skill-row"><span class="skill-label">scikit-learn / ML</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:70%"></div></div></div>
+        <div class="skill-row"><span class="skill-label">Electronics repair</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:93%"></div></div></div>
+        <div class="skill-row"><span class="skill-label">VFDs / Servo drives</span><div class="skill-bar-bg"><div class="skill-bar-fill" style="width:90%"></div></div></div>
       </div>
     </div>
 
     <div>
-      <p style="color:var(--subtext);font-size:15px;line-height:1.8;margin-bottom:24px">
-        MotorWatch IQ was built end-to-end across structured development sessions — from hardware wiring and PLC programming to machine learning model training and portfolio presentation. Every layer was designed, coded, and tested by one engineer.
-      </p>
       <div class="about-links">
-        <a href="https://github.com/Phernando82/motor_watch_IQ" class="about-link" target="_blank">
-          ⌥ motor_watch_IQ — application repository
-        </a>
-        <a href="https://github.com/Phernando82/motorwatch-iq-plc-hmi" class="about-link" target="_blank">
-          ⌥ motorwatch-iq-plc-hmi — TIA Portal project
-        </a>
-        <a href="https://github.com/Phernando82" class="about-link" target="_blank">
-          ⌥ github.com/Phernando82
-        </a>
-        <a href="https://www.linkedin.com/in/fernandos-valverde/" class="about-link" target="_blank">
-          ⌥ LinkedIn — Fernando Valverde
-        </a>
-        <a href="https://phernando82.github.io/portfolio/index.html" class="about-link" target="_blank">
-          ⌥ Portfolio — phernando82.github.io
-        </a>
+        <a href="https://github.com/Phernando82/motor_watch_IQ" class="about-link" target="_blank">⌥ motor_watch_IQ — <span data-en>application repository</span><span data-es>repositorio de la aplicación</span></a>
+        <a href="https://github.com/Phernando82/motorwatch-iq-plc-hmi" class="about-link" target="_blank">⌥ motorwatch-iq-plc-hmi — <span data-en>TIA Portal project</span><span data-es>proyecto TIA Portal</span></a>
+        <a href="https://github.com/Phernando82" class="about-link" target="_blank">⌥ github.com/Phernando82</a>
+        <a href="https://www.linkedin.com/in/fernandos-valverde/" class="about-link" target="_blank">⌥ LinkedIn — Fernando Valverde</a>
+        <a href="https://phernando82.github.io/portfolio/index.html" class="about-link" target="_blank">⌥ <span data-en>Portfolio</span><span data-es>Portafolio</span> — phernando82.github.io</a>
       </div>
     </div>
   </div>
@@ -1062,32 +734,25 @@ footer {
 </footer>
 
 <script>
-// Boot LED animation
-window.addEventListener('load', () => {
-  console.log('[MotorWatch] load fired');
-  const dots = document.querySelectorAll('#bootConsole .boot-dot');
-  console.log('[MotorWatch] dots found:', dots.length);
-  const ledStartMs = (1.95 + 0.4) * 1000 + 200;
+// ── Language toggle ──
+function setLang(lang) {
+  document.body.className = 'lang-' + lang;
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+}
 
+// ── Boot LED animation ──
+window.addEventListener('load', () => {
+  const dots = document.querySelectorAll('#bootConsole .boot-dot');
+  const ledStartMs = (1.95 + 0.4) * 1000 + 200;
   dots.forEach((dot, i) => {
     const isLast = i === dots.length - 1;
-    const offset = i * 250;
-
-    setTimeout(() => {
-      dot.setAttribute('data-state', 'warn');
-      console.log('[MotorWatch] dot', i, 'warn');
-    }, ledStartMs + offset);
-
-    if (!isLast) {
-      setTimeout(() => {
-        dot.setAttribute('data-state', 'ok');
-        console.log('[MotorWatch] dot', i, 'ok');
-      }, ledStartMs + offset + 400);
-    }
+    setTimeout(() => { dot.setAttribute('data-state', 'warn'); }, ledStartMs + i * 250);
+    if (!isLast) { setTimeout(() => { dot.setAttribute('data-state', 'ok'); }, ledStartMs + i * 250 + 400); }
   });
 });
 
-// Report tab switcher
+// ── Report tab switcher ──
 function switchReport(lang, btn) {
   document.querySelectorAll('.report-iframe').forEach(f => f.classList.remove('active'));
   document.querySelectorAll('.report-tab').forEach(t => t.classList.remove('active'));
@@ -1095,21 +760,18 @@ function switchReport(lang, btn) {
   btn.classList.add('active');
 }
 
-// Nav active link on scroll
+// ── Nav active link on scroll ──
 const sections = document.querySelectorAll('section[id]');
 const navLinks  = document.querySelectorAll('.nav-links a');
-
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       navLinks.forEach(a => {
-        a.style.color = a.getAttribute('href') === '#' + entry.target.id
-          ? 'var(--accent)' : '';
+        a.style.color = a.getAttribute('href') === '#' + entry.target.id ? 'var(--accent)' : '';
       });
     }
   });
-}, { threshold: 0.3 });
-
+}, { threshold: 0.2 });
 sections.forEach(s => observer.observe(s));
 </script>
 </body>
