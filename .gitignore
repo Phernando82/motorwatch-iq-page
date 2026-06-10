@@ -1,0 +1,26 @@
+# Dependencies (se usar npm/node futuramente)
+node_modules/
+package-lock.json
+
+# Build output (se usar bundler futuramente)
+dist/
+build/
+
+# Editor
+.vscode/
+.idea/
+*.suo
+*.user
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Secrets (nunca commitar)
+.env
+*.env.local
+
+# Cache
+.cache/
+*.log
